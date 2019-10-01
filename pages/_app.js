@@ -1,6 +1,8 @@
 import App from 'next/app'
 import React from 'react'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
+import withApolloClient from '../lib/with-apollo-client'
+import { ApolloProvider } from 'react-apollo'
 
 const theme = {
   colors: {
@@ -8,13 +10,17 @@ const theme = {
   }
 }
 
-export default class MyApp extends App {
+class MyApp extends App {
   render () {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, apolloClient } = this.props
     return (
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ApolloProvider client={apolloClient}>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ApolloProvider>
     )
   }
 }
+
+export default withApolloClient(MyApp)
