@@ -14,9 +14,6 @@ const GET_STORY = gql`
         id
         cards {
           id
-          title
-          copy
-          img_url
         }
       }
     }
@@ -32,7 +29,7 @@ function Story() {
     return (
       <StoryContainer>
         {data.story.cards.map((card, index) => (
-          <Card idx={index + 1} img_url={card.img_url} copy={card.copy}></Card>
+          <Card idx={card.id}></Card>
         ))}
       </StoryContainer>
     )
