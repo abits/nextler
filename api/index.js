@@ -1,6 +1,6 @@
 const { ApolloServer } = require("apollo-server");
 const fetch = require("node-fetch");
-import { readFile } from fs;
+const { readFile } = require("fs");
 
 const db = readFile('db.json', (err, data) => {
   if (err) throw err;
