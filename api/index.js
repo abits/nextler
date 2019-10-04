@@ -35,16 +35,11 @@ const resolvers = {
             ).then(res => res.text());
           return lorem  
         },
-        img_url: async() => {
-            let img = await fetch(
-                "https://picsum.photos/200/300"
-            ).then(res => res.url);
-            return img
-        },
+        img_url: "https://picsum.photos/200/300"
     },
 
     Story: {
-        id: {},
+        id: 1,
         cards: async() => {
             return [{id: 1, title: "card-1"}, {id: 2, title: "card-2"}, {id: 3, title: "card-3"}];
         },

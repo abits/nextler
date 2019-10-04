@@ -3,10 +3,10 @@ import {
     Section
  } from "./styles"
 
-function Card() {
+function Card(props) {
     return (
         <Section>
-            <Title>Title Card</Title>
+            <Title>Title Card {props.idx}</Title>
         </Section>
     )
 }
