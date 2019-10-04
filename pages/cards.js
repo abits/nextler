@@ -27,12 +27,12 @@ function Story() {
     variables: {},
     notifyOnNetworkStatusChange: true
   });
-  if (!loading && data.story) {
+  if (!loading && !error && data.story) {
     console.dir(data.story.cards);
     return (
       <StoryContainer>
         {data.story.cards.map((card, index) => (
-          <Card idx={index + 1}></Card>
+          <Card idx={index + 1} img_url={card.img_url} copy={card.copy}></Card>
         ))}
       </StoryContainer>
     )
