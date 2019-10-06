@@ -1,32 +1,40 @@
 import React from 'react'
 import styled from 'styled-components'
-import Link from 'next/link';
+import Card from '../components/Card'
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
+const StoryContainer = styled.article`
+margin: 0;
 `
 
-const Story = styled.article`
-  margin: 0;
-`
+const GET_STORY = gql`
+  query story($id: ID!)  {
+      story(id: $id)  {
+        id
+        cards
+      }
+    }
+`;
 
-const Card = styled.section`
-  margin: 0;
-  height: 100vh;
-  scroll-snap-align: start;
-  background-image: url(${props => props.img});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center; 
+function Story() {
+  const { loading, error, data, fetchMore } = useQuery(GET_STORY, {
+    variables: { id: "1"},
+    notifyOnNetworkStatusChange: true
+  });
+  if (!loading && !error && data) {
+    return (
+    <StoryContainer>
+      {data.story.cards.map((card, index) => (<Card idx={card}></Card>))}
+    </StoryContainer>
+      )
+  } else {
+    return (
+      <h1>
+        Error.
+      </h1>
+    )
   }
-`
-export default () => 
-<Story>
-  <Card img={"https://images.pexels.com/photos/1201388/pexels-photo-1201388.jpeg"}><Title>A</Title></Card>
-  <Card img={"https://images.pexels.com/photos/2826351/pexels-photo-2826351.jpeg"}><Title>B</Title></Card>
-  <Card img={"https://images.pexels.com/photos/614497/pexels-photo-614497.jpeg"}><Title>C</Title></Card>
-  <Card img={"https://images.pexels.com/photos/2984347/pexels-photo-2984347.jpeg"}><Title>D</Title></Card>
-  <Card img={"https://images.pexels.com/photos/614497/pexels-photo-614497.jpeg"}><Title>E</Title></Card>
-  <Card img={"https://images.pexels.com/photos/2826351/pexels-photo-2826351.jpeg"}><Title>F</Title></Card>
-</Story>
+}
+
+export default () => <Story></Story>
