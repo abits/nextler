@@ -9,30 +9,25 @@ margin: 0;
 `
 
 const GET_STORY = gql`
-  query story {
-      story {
+  query story($id: ID!)  {
+      story(id: $id)  {
         id
-        cards {
-          id
-        }
+        cards
       }
     }
 `;
 
 function Story() {
   const { loading, error, data, fetchMore } = useQuery(GET_STORY, {
-    variables: {},
+    variables: { id: "1"},
     notifyOnNetworkStatusChange: true
   });
-  if (!loading && !error && data.story) {
-    console.dir(data.story.cards);
+  if (!loading && !error && data) {
     return (
-      <StoryContainer>
-        {data.story.cards.map((card, index) => (
-          <Card idx={card.id}></Card>
-        ))}
-      </StoryContainer>
-    )
+    <StoryContainer>
+      {data.story.cards.map((card, index) => (<Card idx={card}></Card>))}
+    </StoryContainer>
+      )
   } else {
     return (
       <h1>

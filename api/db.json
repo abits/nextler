@@ -1,25 +1,25 @@
 {
 	"cards": [{
-			"id": 1,
+			"id": "1",
 			"title": "card-1",
 			"copy": "Cow leberkas shankle boudin bacon shoulder t-bone buffalo jerky flank pork chop ground round pancetta.  Burgdoggen pork chop t-bone, shank picanha turducken kielbasa meatloaf hamburger porchetta pork belly spare ribs flank filet mignon andouille. Tri-tip boudin porchetta burgdoggen, sausage biltong meatloaf rump kielbasa pork loin chuck ham hock turducken capicola. T-bone tail kevin tongue pork loin jerky kielbasa alcatra sirloin.",
 			"img_url": "https://picsum.photos/200/300"
 		},
 		{
-			"id": 2,
+			"id": "2",
 			"title": "card-2",
 			"copy": "Shankle ground round tri-tip, alcatra leberkas pancetta ball tip picanha pork loin strip steak jerky.  Rump sirloin doner tongue turducken kielbasa, tri-tip cupim fatback bacon pork chop tail beef jerky.  Short ribs jowl brisket jerky pancetta sirloin.  Meatloaf fatback bresaola shankle, picanha drumstick burgdoggen venison landjaeger porchetta.",
 			"img_url": "https://picsum.photos/200/300"
 		},
 		{
-			"id": 3,
+			"id": "3",
 			"title": "card-3",
 			"copy": "Ground round boudin ball tip meatball short ribs chicken, bacon andouille pastrami brisket ribeye pancetta capicola pork loin.  Porchetta burgdoggen fatback filet mignon, t-bone cupim swine pig pork corned beef sausage brisket turkey chuck.  Jowl prosciutto salami pork loin drumstick venison meatloaf doner alcatra jerky. Pork tongue picanha bacon tenderloin, short ribs turkey porchetta. Tri-tip pork loin leberkas jerky jowl ball tip doner pork belly.",
 			"img_url": "https://picsum.photos/200/300"
 		}
 	],
 	"stories": [{
-		"id": 1,
-		"cards": [1, 2, 3]
+		"id": "1",
+		"cards": ["1", "2", "3"]
 	}]
 }

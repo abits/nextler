@@ -1,16 +1,18 @@
 const { ApolloServer } = require("apollo-server");
 const fetch = require("node-fetch");
-const { readFile } = require("fs");
+const { readFileSync } = require("fs");
+const { find, filter } = require('lodash');
 
-const db = readFile('db.json', (err, data) => {
+
+const data_file = readFileSync('./db.json', (err, data) => {
   if (err) throw err;
-  return JSON.parse(data);
 });
+const db = JSON.parse(data_file);
 
 const typeDefs = `
   type Query {
-    story: Story
-    card: Card
+    story(id: ID!): Story
+    card(id: ID!): Card
   }
   type Card {
       id: ID!
@@ -20,37 +22,17 @@ const typeDefs = `
   }
   type Story {
       id: ID!
-      cards: [Card!]
+      cards: [ID!]
   }
 `;
 
 const resolvers = {
     Query: {
-        story: async() => {
-            return {id: 1}
+        story(obj, args, context, info) {
+          return find(db.stories, { id: args.id });
         },
-        card: async() => {
-          return {}},
-    },
-
-    Card: {
-        id: {},
-        title: {},
-        copy: async () => {
-            let lorem = await fetch(
-                "https://baconipsum.com/api/?type=all-meat&paras=1&format=text"
-            ).then(res => res.text());
-          return lorem  
-        },
-        img_url: () => {
-          return "https://picsum.photos/200/300";
-        }
-    },
-
-    Story: {
-        id: () => { return 1 },
-        cards: async() => {
-            return [{id: 1, title: "card-1"}, {id: 2, title: "card-2"}, {id: 3, title: "card-3"}];
+        card(obj, args, context, info) {
+          return find(db.cards, { id: args.id });
         },
     }
   };

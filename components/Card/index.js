@@ -6,9 +6,8 @@ import {
  } from "./styles"
 
 const GET_CARD = gql`
-  query card {
-    card {
-        id
+  query card($id: ID!) {
+    card(id: $id) {
         title
         copy
         img_url
@@ -18,10 +17,10 @@ const GET_CARD = gql`
 
 function Card(props) {
     const { loading, error, data, fetchMore } = useQuery(GET_CARD, {
-        variables: {},
+        variables: { id: props.idx },
         notifyOnNetworkStatusChange: true
       });
-    if (!loading && !error && data.card) {
+    if (!loading && !error && data) {
     return (
         <Section img={data.card.img_url}>
             <Title>Title Card {props.idx}</Title>
