@@ -1,0 +1,20 @@
+{
+  "name": "nextler-server",
+  "version": "1.0.0",
+  "description": "Apollo demo server for nextler app.",
+  "private": true,
+  "scripts": {
+    "dev": "npm install && nodemon server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "apollo-server": "^2.9.4",
+    "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.8.0",
+    "nodemon": "^1.19.3"
+  },
+  "license": "ISC"
+}
