@@ -1,6 +1,8 @@
 {
-  "name": "with-styled-components",
+  "name": "nextler-app",
   "version": "1.0.0",
+  "description": "NexJS demo application.",
+  "private": true,
   "scripts": {
     "dev": "next",
     "build": "next build",
