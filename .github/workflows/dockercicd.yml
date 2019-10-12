@@ -10,5 +10,11 @@ jobs:
  
     steps:
     - uses: actions/checkout@v1
+    - name: Log in to registry
+      uses: actions/docker/login@master
+      env:
+        DOCKER_REGISTRY_URL: hub.docker.com
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
