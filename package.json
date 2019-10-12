@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "docker:build": "docker build -t cmartel/nextler-app:${npm_package_version} .",
+    "docker:publish": "docker push cmartel/nextler-app:${npm_package_version}"
   },
   "dependencies": {
     "apollo-boost": "^0.4.4",

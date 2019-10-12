@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "npm install && nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "docker:build": "docker build -t cmartel/nextler-api:${npm_package_version} .",
+    "docker:publish": "docker push cmartel/nextler-api:${npm_package_version}"
   },
   "dependencies": {
     "apollo-server": "^2.9.4",

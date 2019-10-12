@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 COPY ./package*.json ./
 RUN npm --silent install
 
+
 # Copying source files
 COPY . .
 
