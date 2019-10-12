@@ -4,9 +4,9 @@ FROM node:10
 WORKDIR /usr/src/app
 # Installing dependencies
 COPY package*.json ./
-RUN npm --silent install
+RUN npm --silent --only=production install
 
-# Copying source files
+# copying source files
 COPY . .
 
 # Building app
