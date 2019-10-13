@@ -4,7 +4,7 @@ jobs:
 
     machine:
       image: circleci/classic:latest
-    working_directory: .
+    working_directory: /home/app
 
     steps:
       - checkout 
@@ -16,7 +16,7 @@ jobs:
   push:
     machine:
       image: circleci/classic:latest
-    working_directory: .
+    working_directory: /home/app
     steps:
       - checkout 
       - run:
