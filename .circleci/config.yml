@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Push image
           command: |
-            docker build -t $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1 .
+            # docker build -t $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1 .
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
             docker push $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1    
 
