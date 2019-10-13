@@ -1,0 +1,41 @@
+version: 2
+jobs:
+  build:
+
+    machine:
+      image: circleci/node:10
+      docker_layer_caching: true
+    working_directory: .
+
+    steps:
+      - checkout 
+      - run:
+          name: build image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1 .
+
+  push:
+    machine:
+      image: circleci/node:10
+      docker_layer_caching: true
+    working_directory: .
+    steps:
+      - checkout 
+      - run:
+          name: Push image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1 .
+            echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
+            docker push $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1    
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:    
+      - build:
+          context: DOCKERHUB
+
+      - push:
+          context: DOCKERHUB
+          requires:
+            - build
