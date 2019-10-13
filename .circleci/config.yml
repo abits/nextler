@@ -28,7 +28,7 @@ workflows:
   version: 2
   build-deploy:
     jobs:    
-      - push-app:
-          context: DOCKERHUB
       - push-api:
+          context: DOCKERHUB
+      - push-app:
           context: DOCKERHUB
