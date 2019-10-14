@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 orbs:
   kubernetes: circleci/kubernetes@0.8.0
 jobs:
