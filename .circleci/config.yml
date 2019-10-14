@@ -50,3 +50,6 @@ workflows:
           context: DOCKERHUB
       - deploy:
           context: KUBESAIL
+          requires:
+            - push-api
+            - push-app
