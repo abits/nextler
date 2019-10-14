@@ -1,6 +1,8 @@
 version: 2.1
+
 orbs:
   kubernetes: circleci/kubernetes@0.8.0
+  
 jobs:
   push-app:
     machine:
@@ -31,10 +33,10 @@ jobs:
       image: circleci/classic:latest
     steps:
       - checkout 
-      - kube-orb/install-kubeconfig:
+      - kubernetes/install-kubeconfig:
           kubeconfig: KUBECONFIG
-      - kube-orb/install-kubectl
-      - kube-orb/update-container-image:
+      - kubernetes/install-kubectl
+      - kubernetes/update-container-image:
           container-image-updates: 'app=$DOCKERHUB_USERNAME/nextler-api:$CIRCLE_SHA1'
           get-rollout-status: true
           record: true
