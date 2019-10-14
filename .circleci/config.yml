@@ -32,7 +32,8 @@ jobs:
     steps:
       - checkout 
       - kube-orb/install-kubeconfig:
-          kubeconfig: KUBECONFIG   
+          kubeconfig: KUBECONFIG
+      - kube-orb/install-kubectl
       - kube-orb/update-container-image:
           container-image-updates: 'app=$DOCKERHUB_USERNAME/nextler-api:$CIRCLE_SHA1'
           get-rollout-status: true
