@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  kubernetes: circleci/kubernetes@0.8.0
 jobs:
   push-app:
     machine:
