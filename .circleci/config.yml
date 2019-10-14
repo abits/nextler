@@ -45,3 +45,5 @@ workflows:
           context: DOCKERHUB
       - push-app:
           context: DOCKERHUB
+      - push-app:
+          context: KUBESAIL
