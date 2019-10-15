@@ -1,5 +1,8 @@
 version: 2.1
   
+orbs:
+  kubernetes: circleci/kubernetes@0.8.0
+
 jobs:
   push-app:
     machine:
@@ -26,14 +29,11 @@ jobs:
             docker push $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1    
 
   deploy:
-    docker:
-      - image: bitnami/kubectl:latest
+    machine:
+      image: circleci/classic:latest
     steps:
-      - run:
-          name: Test Kubectl
-          command: |
-            mkdir /project && chown -R $USER:$USER /project
-            kubectl    
+      - checkout
+      - kube-orb/install-kubectl 
 
 workflows:
   version: 2
