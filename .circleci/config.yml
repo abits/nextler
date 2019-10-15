@@ -39,7 +39,6 @@ jobs:
           command: |
             mkdir -p $HOME/.kube
             echo -n ${KUBECONFIG_ENCODED} | base64 --decode --ignore-garbage > $HOME/.kube/config
-            kubectl config current-context 
             kubectl set image deployment/app app="cmartel/nextler-app:${CIRCLE_SHA1}"
             kubectl set image deployment/api api="cmartel/nextler-api:${CIRCLE_SHA1}"
 
