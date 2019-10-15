@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Test Kubectl
           command: |
-            chown -R $USER:$USER /project
+            mkdir /project && chown -R $USER:$USER /project
             kubectl    
 
 workflows:
