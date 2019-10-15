@@ -33,9 +33,13 @@ jobs:
       image: circleci/classic:latest
     steps:
       - checkout
-      - kube-orb/install-kubectl 
-      - kube-orb/install-kubeconfig:
-          kubeconfig: KUBECONFIG
+      - kube-orb/install-kubectl
+      - run:
+          name: test
+          command: |
+            echo -n ${KUBECONFIG}
+      # - kube-orb/install-kubeconfig:
+          # kubeconfig: KUBECONFIG
 
 workflows:
   version: 2
