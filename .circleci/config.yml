@@ -37,6 +37,7 @@ jobs:
       - run:
           name: test
           command: |
+            mkdir $(pwd)/.kube
             echo -n ${KUBECONFIG} | base64 --decode --ignore-garbage > $(pwd)/.kube/config
             kubectl config current-context 
       # - kube-orb/install-kubeconfig:
