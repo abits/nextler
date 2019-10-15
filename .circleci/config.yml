@@ -27,7 +27,7 @@ jobs:
 
   deploy:
     docker:
-      image: bitnami/kubectl:latest
+      - image: bitnami/kubectl:latest
     steps:
       - checkout
       - run:
