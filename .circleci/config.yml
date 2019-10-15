@@ -29,8 +29,6 @@ jobs:
             docker push $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1    
 
   deploy:
-    machine:
-      image: circleci/classic:latest
     steps:
       - kubernetes/kubectl-validate:
           name: prod-validate
