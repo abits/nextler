@@ -40,6 +40,7 @@ jobs:
             mkdir -p $HOME/.kube
             echo -n ${KUBECONFIG_ENCODED} | base64 --decode --ignore-garbage > $HOME/.kube/config
             kubectl config current-context 
+            kubectl set image deployment/app app=$DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1
       # - kube-orb/install-kubeconfig:
           # kubeconfig: KUBECONFIG
 
