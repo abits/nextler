@@ -29,7 +29,6 @@ jobs:
     docker:
       - image: bitnami/kubectl:latest
     steps:
-      - checkout
       - run:
           name: Test Kubectl
           command: |
