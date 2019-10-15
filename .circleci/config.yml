@@ -1,7 +1,7 @@
 version: 2.1
   
 orbs:
-  kubernetes: circleci/kubernetes@0.8.0
+  kube-orb: circleci/kubernetes@0.8.0
 
 jobs:
   push-app:
