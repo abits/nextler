@@ -1,7 +1,4 @@
 version: 2.1
-
-orbs:
-  kubernetes: lifeway/kubernetes@1.3.0
   
 jobs:
   push-app:
@@ -28,15 +25,15 @@ jobs:
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
             docker push $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1    
 
-  deploy:
+  push-api:
+    docker:
+      image: bitnami/kubectl:latest
     steps:
-      - kubernetes/kubectl-validate:
-          name: prod-validate
-          encoded-kubeconfig: '${KUBECONFIG}'
-          kube-context: kubesail-abits
-          workload-name: kubesail-abits
-          workload-namespace: kubesail-abits
-          rollback: true
+      - checkout
+      - run:
+          name: Test Kubectl
+          command: |
+            kubectl    
 
 workflows:
   version: 2
