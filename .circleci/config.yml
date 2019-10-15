@@ -35,25 +35,24 @@ jobs:
       - checkout
       - kube-orb/install-kubectl
       - run:
-          name: test
+          name: Update images
           command: |
             mkdir -p $HOME/.kube
             echo -n ${KUBECONFIG_ENCODED} | base64 --decode --ignore-garbage > $HOME/.kube/config
             kubectl config current-context 
             kubectl set image deployment/app app=$DOCKERHUB_USERNAME/nextler-app:$CIRCLE_SHA1
-      # - kube-orb/install-kubeconfig:
-          # kubeconfig: KUBECONFIG
+            kubectl set image deployment/api api=$DOCKERHUB_USERNAME/nextler-api:$CIRCLE_SHA1
 
 workflows:
   version: 2
   build-deploy:
     jobs:    
-      # - push-api:
-          # context: DOCKERHUB
-      # - push-app:
-          # context: DOCKERHUB
+      - push-api:
+          context: DOCKERHUB
+      - push-app:
+          context: DOCKERHUB
       - deploy:
           context: KUBESAIL
-          # requires:
-            # - push-api
-            # - push-app
+          requires:
+            - push-api
+            - push-app
