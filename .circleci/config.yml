@@ -47,8 +47,14 @@ workflows:
   version: 2
   build-deploy:
     jobs:
+      - cypress/install:
+          build: npm run build
       - cypress/run:
+          requires:
+            - cypress/install
           record: true
+          start: npm start
+          wait-on: 'http://localhost:3000'
       - push-api:
           requires:
             - cypress/run
