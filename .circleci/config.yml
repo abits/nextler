@@ -6,6 +6,8 @@ orbs:
 
 jobs:
   test:
+    machine:
+      image: circleci/classic:latest
     steps:
       - cypress/run:
           record: true
