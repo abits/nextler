@@ -48,8 +48,6 @@ workflows:
   build-deploy:
     jobs:
       - cypress/run:
-          requires:
-            - cypress/install
           record: true
           start: ./node_modules/.bin/next build &&./node_modules/.bin/next start
       - push-api:
