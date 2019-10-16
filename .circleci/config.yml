@@ -47,10 +47,25 @@ workflows:
   build-deploy:
     jobs:    
       - push-api:
+          filters:
+            branches:
+              only: 
+                - master
+                - development
           context: DOCKERHUB
       - push-app:
+          filters:
+            branches:
+              only: 
+                - master
+                - development        
           context: DOCKERHUB
       - deploy:
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /(\d|[1-9]\d*)\.(\d|[1-9]\d*)\.(\d|[1-9]\d*)/
           context: KUBESAIL
           requires:
             - push-api
