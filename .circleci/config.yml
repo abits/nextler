@@ -12,9 +12,9 @@ jobs:
       - run:
           name: Push image
           command: |
-            docker build -t $DOCKERHUB_USERNAME/nextler-api:$CIRCLE_TAG ./api
+            docker build -t $DOCKERHUB_USERNAME/nextler-api:${CIRCLE_BUILD_NUM} ./api
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-            docker push $DOCKERHUB_USERNAME/nextler-api:$CIRCLE_TAG    
+            docker push $DOCKERHUB_USERNAME/nextler-api:${CIRCLE_BUILD_NUM}   
 
   push-api:
     machine:
@@ -24,9 +24,9 @@ jobs:
       - run:
           name: Push image
           command: |
-            docker build -t $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_TAG .
+            docker build -t $DOCKERHUB_USERNAME/nextler-app:${CIRCLE_BUILD_NUM} .
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-            docker push $DOCKERHUB_USERNAME/nextler-app:$CIRCLE_TAG    
+            docker push $DOCKERHUB_USERNAME/nextler-app:${CIRCLE_BUILD_NUM}    
 
   deploy:
     machine:
@@ -39,8 +39,8 @@ jobs:
           command: |
             mkdir -p $HOME/.kube
             echo -n ${KUBECONFIG_ENCODED} | base64 --decode --ignore-garbage > $HOME/.kube/config
-            kubectl set image deployment/app app="cmartel/nextler-app:${CIRCLE_TAG}"
-            kubectl set image deployment/api api="cmartel/nextler-api:${CIRCLE_TAG}"
+            kubectl set image deployment/app app="cmartel/nextler-app:${CIRCLE_BUILD_NUM}"
+            kubectl set image deployment/api api="cmartel/nextler-api:${CIRCLE_BUILD_NUM}"
 
 workflows:
   version: 2
@@ -64,8 +64,6 @@ workflows:
           filters:
             branches:
               only: master
-            tags:
-              only: /(\d|[1-9]\d*)\.(\d|[1-9]\d*)\.(\d|[1-9]\d*)/
           context: KUBESAIL
           requires:
             - push-api
