@@ -48,12 +48,12 @@ workflows:
   build-deploy:
     jobs:
       - cypress/install:
-          build: ./node_modules/.bin/next build && ./node_modules/.bin/next start
+          build: ./node_modules/.bin/next build
       - cypress/run:
           requires:
             - cypress/install
           record: true
-          start: npm start
+          start: ./node_modules/.bin/next start
           wait-on: 'http://localhost:3000'
       - push-api:
           requires:
