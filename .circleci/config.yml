@@ -12,9 +12,9 @@ jobs:
       - run:
           name: Push image
           command: |
-            docker build -t $DOCKERHUB_USERNAME/nextler-api:${CIRCLE_BUILD_NUM} ./api
+            docker build -t $DOCKERHUB_USERNAME/nextler-api:${CIRCLE_SHA1} ./api
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-            docker push $DOCKERHUB_USERNAME/nextler-api:${CIRCLE_BUILD_NUM}   
+            docker push $DOCKERHUB_USERNAME/nextler-api:${CIRCLE_SHA1}   
 
   push-api:
     machine:
@@ -24,9 +24,9 @@ jobs:
       - run:
           name: Push image
           command: |
-            docker build -t $DOCKERHUB_USERNAME/nextler-app:${CIRCLE_BUILD_NUM} .
+            docker build -t $DOCKERHUB_USERNAME/nextler-app:${CIRCLE_SHA1} .
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-            docker push $DOCKERHUB_USERNAME/nextler-app:${CIRCLE_BUILD_NUM}    
+            docker push $DOCKERHUB_USERNAME/nextler-app:${CIRCLE_SHA1}    
 
   deploy:
     machine:
@@ -39,8 +39,8 @@ jobs:
           command: |
             mkdir -p $HOME/.kube
             echo -n ${KUBECONFIG_ENCODED} | base64 --decode --ignore-garbage > $HOME/.kube/config
-            kubectl set image deployment/app app="cmartel/nextler-app:${CIRCLE_BUILD_NUM}"
-            kubectl set image deployment/api api="cmartel/nextler-api:${CIRCLE_BUILD_NUM}"
+            kubectl set image deployment/app app="cmartel/nextler-app:${CIRCLE_SHA1}"
+            kubectl set image deployment/api api="cmartel/nextler-api:${CIRCLE_SHA1}"
 
 workflows:
   version: 2
