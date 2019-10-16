@@ -23,7 +23,7 @@ function Card(props) {
     if (!loading && !error && data) {
     return (
         <Section img={data.card.img_url}>
-            <Title>Title Card {props.idx}</Title>
+            <Title>Title Kard {props.idx}</Title>
             <div>{data.card.copy}</div>
         </Section>
     )
