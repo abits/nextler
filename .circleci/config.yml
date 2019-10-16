@@ -47,14 +47,11 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - cypress/install:
-          build: ./node_modules/.bin/next build
       - cypress/run:
           requires:
             - cypress/install
           record: true
-          start: ./node_modules/.bin/next start
-          wait-on: 'http://localhost:3000'
+          start: ./node_modules/.bin/next build &&./node_modules/.bin/next start
       - push-api:
           requires:
             - cypress/run
