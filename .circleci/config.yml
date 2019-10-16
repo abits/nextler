@@ -48,7 +48,7 @@ workflows:
   build-deploy:
     jobs:
       - cypress/install:
-          build: npm run build
+          build: next build && next start
       - cypress/run:
           requires:
             - cypress/install
