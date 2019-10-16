@@ -2,8 +2,14 @@ version: 2.1
   
 orbs:
   kube-orb: circleci/kubernetes@0.8.0
+  cypress: cypress-io/cypress@1
 
 jobs:
+  test:
+    steps:
+      - cypress/run:
+          record: true
+
   push-app:
     machine:
       image: circleci/classic:latest
@@ -45,8 +51,11 @@ jobs:
 workflows:
   version: 2
   build-deploy:
-    jobs:    
+    jobs:
+      - test    
       - push-api:
+          requires:
+            - test
           filters:
             branches:
               only: 
@@ -54,6 +63,8 @@ workflows:
                 - development
           context: DOCKERHUB
       - push-app:
+          requires:
+            - test
           filters:
             branches:
               only: 
