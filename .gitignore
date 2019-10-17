@@ -2,3 +2,4 @@ node_modules
 .next
 nextler.code-workspace
 .env
+cypress/videos
