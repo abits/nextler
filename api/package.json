@@ -10,7 +10,7 @@
     "docker:publish": "docker push cmartel/nextler-api:${npm_package_version}"
   },
   "dependencies": {
-    "apollo-server": "^2.9.4",
+    "apollo-server": "^2.14.2",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0"
   },
